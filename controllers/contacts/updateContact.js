@@ -7,7 +7,7 @@ const updateContact = async (req, res) => {
   if (!result) {
     throw new NotFound(`Product with id=${contactId} not found`)
   }
-  req.json({
+  res.json({
     status: 'success',
     code: 200,
     data: {

@@ -1,6 +1,7 @@
 const contactsOperations = require('../../model/index')
 
 const addContact = async (req, res) => {
+  // console.log(req.body)
   const result = await contactsOperations.addContact(req.body)
   res.status(201).json({
     status: 'success',
