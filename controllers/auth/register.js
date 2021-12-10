@@ -4,7 +4,8 @@ const { User } = require('../../models')
 const register = async(req, res) => {
   const { email, password } = req.body
   const user = await User.findOne({ email })
-  if (!user) {
+  console.log(user)
+  if (user !== null) {
     throw new Conflict(`User with ${email} already exist`)
   }
   const newUser = new User({ email })

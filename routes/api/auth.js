@@ -5,8 +5,8 @@ const { joiUserSchema } = require('../../models/user')
 
 const router = express.Router()
 
-router.post('/users/signup', validation(joiUserSchema), controllerWrapper(controller.register))
-router.post('/users/login', validation(joiUserSchema), controllerWrapper(controller.login))
-router.get('/users/logout', auth, controllerWrapper(controller.logout))
+router.post('/signup', validation(joiUserSchema), controllerWrapper(controller.register))
+router.post('/login', validation(joiUserSchema), controllerWrapper(controller.login))
+router.get('/logout', auth, controllerWrapper(controller.logout))
 
 module.exports = router
