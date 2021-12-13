@@ -1,3 +1,4 @@
 const getCurrent = require('./getCurrent')
+const subscriptionUpdate = require('./subscriptionUpdate')
 
-module.exports = { getCurrent }
+module.exports = { getCurrent, subscriptionUpdate }
