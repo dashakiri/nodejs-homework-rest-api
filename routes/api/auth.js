@@ -1,5 +1,5 @@
 const express = require('express')
-const { auth, validation, controllerWrapper } = require('../../middlewares')
+const { auth, validation, upload, controllerWrapper } = require('../../middlewares')
 const { auth: controller } = require('../../controllers')
 const { joiUserSchema } = require('../../models/user')
 
@@ -10,5 +10,6 @@ router.post('/login', validation(joiUserSchema), controllerWrapper(controller.lo
 router.get('/logout', auth, controllerWrapper(controller.logout))
 router.get('/', auth, controllerWrapper(controller.getCurrent))
 router.patch('/subscription', auth, controllerWrapper(controller.subscriptionUpdate))
+router.patch('/avatars', auth, upload.single('avatar'), controllerWrapper(controller.updateAvatar))
 
 module.exports = router
