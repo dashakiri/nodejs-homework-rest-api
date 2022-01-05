@@ -10,7 +10,7 @@ const updateAvatar = async(req, res) => {
   try {
     const resultUpload = path.join(avatarDir, imageName)
     await fs.rename(tempUpload, resultUpload)
-    const avatarURL = path.join('public', 'avatars', imageName)
+    const avatarURL = resultUpload
     await User.findOneAndUpdate({ _id: req.user._id }, { avatarURL }, { new: true, runValidators: true })
     res.json({ avatarURL })
   } catch (error) {
