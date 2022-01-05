@@ -4,7 +4,7 @@ const { Contact } = require('../../models')
 const listContacts = async (req, res) => {
   const { _id } = req.user
   const { page = 1, limit = 5, favorite } = req.query
-  if (typeof page !== 'number' || typeof limit !== 'number') {
+  if (isNaN(page) || isNaN(limit)) {
     throw new BadRequest('Page and limit must be numbers')
   }
   const skip = (page - 1) * limit
