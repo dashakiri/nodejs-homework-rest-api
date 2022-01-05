@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose')
+const { Schema, SchemaTypes, model } = require('mongoose')
 const Joi = require('joi')
 
 const contactSchema = Schema({
@@ -17,7 +17,12 @@ const contactSchema = Schema({
     enum: [true, false],
     default: false,
   },
-}, {versionKey: false, timestamps: true})
+  owner: {
+    type: SchemaTypes.ObjectId,
+    ref: 'user',
+    required: true
+  }
+}, { versionKey: false, timestamps: true })
 
 const joiSchema = Joi.object({
   name: Joi.string().required(),
