@@ -1,6 +1,7 @@
 const path = require('path')
 const fs = require('fs/promises')
 const { User } = require('../../models')
+const { HOST, PORT = 3000 } = process.env
 
 const avatarDir = path.join(__dirname, '../../', 'public', 'avatars')
 const updateAvatar = async(req, res) => {
@@ -10,7 +11,8 @@ const updateAvatar = async(req, res) => {
   try {
     const resultUpload = path.join(avatarDir, imageName)
     await fs.rename(tempUpload, resultUpload)
-    const avatarURL = resultUpload
+    const avatarURL = path.join(`${HOST}:${PORT}`, 'public', 'avatars', imageName)
+    console.log(avatarURL)
     await User.findOneAndUpdate({ _id: req.user._id }, { avatarURL }, { new: true, runValidators: true })
     res.json({ avatarURL })
   } catch (error) {
