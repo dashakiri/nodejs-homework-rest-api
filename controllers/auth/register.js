@@ -1,6 +1,10 @@
 const { Conflict } = require('http-errors')
 const { User } = require('../../models')
 const gravatar = require('gravatar')
+const { v4 } = require('uuid')
+require('dotenv').config()
+const {HOST, PORT = 3000} = process.env
+const sendEmail = require('../../helpers')
 
 const register = async(req, res) => {
   const { email, password } = req.body
@@ -9,16 +13,27 @@ const register = async(req, res) => {
     throw new Conflict(`User with ${email} already exist`)
   }
   const avatarURL = gravatar.url(email, { protocol: 'https' })
-  const newUser = new User({ email, avatarURL })
+  const verificationToken = v4()
+  const newUser = new User({ email, avatarURL, verificationToken })
   newUser.setPassword(password)
   await newUser.save()
+  
+  const mail = {
+    to: email,
+    subject: 'email verification',
+    html: `<a target='blank' href='${HOST}:${PORT}/api/users/verify/${verificationToken}'>Verify email</a>`
+  }
+
+  await sendEmail(mail)
+
   res.status(201).json({
     status: 'success',
     code: 201,
     data: {
       user: {
         email,
-        avatarURL
+        avatarURL,
+        verificationToken,
       }
     }
   })

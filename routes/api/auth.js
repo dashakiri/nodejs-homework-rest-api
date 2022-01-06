@@ -11,5 +11,7 @@ router.get('/logout', auth, controllerWrapper(controller.logout))
 router.get('/', auth, controllerWrapper(controller.getCurrent))
 router.patch('/subscription', auth, controllerWrapper(controller.subscriptionUpdate))
 router.patch('/avatars', auth, upload.single('avatar'), controllerWrapper(controller.updateAvatar))
+router.get('/verify/:verificationToken', controllerWrapper(controller.verifyEmail))
+router.post('/verify', controllerWrapper(controller.reVerify))
 
 module.exports = router
