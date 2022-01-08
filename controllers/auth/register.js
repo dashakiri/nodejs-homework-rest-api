@@ -2,9 +2,9 @@ const { Conflict } = require('http-errors')
 const { User } = require('../../models')
 const gravatar = require('gravatar')
 const { v4 } = require('uuid')
-require('dotenv').config()
-const {HOST, PORT = 3000} = process.env
 const sendEmail = require('../../helpers')
+require('dotenv').config()
+const { HOST, PORT = 3000 } = process.env
 
 const register = async(req, res) => {
   const { email, password } = req.body
@@ -17,7 +17,7 @@ const register = async(req, res) => {
   const newUser = new User({ email, avatarURL, verificationToken })
   newUser.setPassword(password)
   await newUser.save()
-  
+
   const mail = {
     to: email,
     subject: 'email verification',
