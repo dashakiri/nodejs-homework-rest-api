@@ -1,6 +1,7 @@
 const path = require('path')
 const fs = require('fs/promises')
 const { User } = require('../../models')
+require('dotenv').config()
 const { HOST, PORT = 3000 } = process.env
 
 const avatarDir = path.join(__dirname, '../../', 'public', 'avatars')
