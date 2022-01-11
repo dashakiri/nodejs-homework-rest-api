@@ -3,7 +3,7 @@ const { User } = require('../../models')
 const sendEmail = require('../../helpers')
 const { v4 } = require('uuid')
 require('dotenv').config()
-const { HOST, PORT = 3000 } = process.env
+const { PORT = 3000 } = process.env
 
 const postVerify = async(req, res) => {
   const { email } = req.body
@@ -19,7 +19,7 @@ const postVerify = async(req, res) => {
   const mail = {
     to: email,
     subject: 'Email verification',
-    html: `<a target='blank' href='${HOST}:${PORT}/api/users/verify/${verificationToken}'>Verify email</a>`
+    html: `<a target='blank' href='${PORT}/api/users/verify/${verificationToken}'>Verify email</a>`
   }
 
   await sendEmail(mail)

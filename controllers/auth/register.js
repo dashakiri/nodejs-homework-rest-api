@@ -4,7 +4,7 @@ const gravatar = require('gravatar')
 const { v4 } = require('uuid')
 const sendEmail = require('../../helpers')
 require('dotenv').config()
-const { HOST, PORT = 3000 } = process.env
+const { PORT = 3000 } = process.env
 
 const register = async(req, res) => {
   const { email, password } = req.body
@@ -21,7 +21,7 @@ const register = async(req, res) => {
   const mail = {
     to: email,
     subject: 'email verification',
-    html: `<a target='blank' href='${HOST}:${PORT}/api/users/verify/${verificationToken}'>Verify email</a>`
+    html: `<a target='blank' href='${PORT}/api/users/verify/${verificationToken}'>Verify email</a>`
   }
 
   await sendEmail(mail)
