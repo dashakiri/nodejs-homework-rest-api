@@ -3,8 +3,7 @@ const { User } = require('../../models')
 const sendEmail = require('../../helpers')
 const { v4 } = require('uuid')
 require('dotenv').config()
-// const { PORT = 3000 } = process.env
-const host = 'https://floating-atoll-23449.herokuapp.com'
+const host = 'https://dashakiri-phonebookapp.netlify.app'
 
 const postVerify = async(req, res) => {
   const { email } = req.body
